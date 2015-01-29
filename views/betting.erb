@@ -1,0 +1,9 @@
+<h3>Enter an amount, as a whole number that you would like to bet for this round.</h3>
+
+<p><%= session[:player_name] %> has $<%= session[:player_money].to_i %></p>
+
+<form action='/bettingthehouse' method='post'>
+	<input type="text" name="bet_amount"/>
+	<br/>
+	<input type="submit" class="btn"/>
+</form>

@@ -1,0 +1,92 @@
+<div id="game">
+  <h5>Blackjack!!!</h5>
+
+  Welcome <%= session[:player_name] %>.
+
+  <br/>
+  <br/>
+  <div class="well well-small">
+  <h4>Dealer has the following cards:</h4>
+  <br/>
+  <ul>
+  	<% session[:dealer_hand].each do |each_card| %>
+      <%= card_display(each_card) %>
+    <% end %>
+  </ul>
+  </div>
+
+  <% if @show_dealer_hit_button%>
+    <form action="/game/dealer/hit" method="post">
+      <input type="submit" class="btn btn-primary" value="Click to see Dealer card">
+    </form>
+  <% end %>
+  <br/> 
+  <br/>
+  <div class="well well-small" id="player_cards">
+  <h4><%= session[:player_name] %> has the following cards:</h4>
+  <br/>
+  <ul>
+    <% session[:player_hand].each do |each_card| %>
+      <%= card_display(each_card) %>
+    <% end %>
+  </ul>
+
+  </div>
+  <br/>
+  <br/>
+
+  <%= session[:player_name] %> has a total of
+  <%= calculate_total(session[:player_hand]) %>
+
+  <br/>
+  <br/>
+  <h4>
+  <%= session[:player_name] %> has a total of $<%= session[:player_money].to_i%> on hand, and has bet $<%= session[:round_bet]%> this round.
+  <h4>
+  <br/>
+  <br/>
+
+  <% if @show_hit_or_stay_buttons %>
+
+  What would you like to do? Click on the appropriate action below, if it is available
+
+  <br/>
+  <br/>
+
+    <form id="hit_form" action="/game/player/hit" method="post">
+  	  <input type="submit" class="btn" value="HIT" />
+    </form>
+
+    <form id="stay_form" action="/game/player/stay" method="post">
+  	  <input type="submit" class="btn" value="STAY" />
+    </form>
+  <% end %>
+
+  <% if @gameoff %>
+    <h5>Would you like to play again? Click on one of the buttons to continue.</h5>
+
+    <form action="/betting" method="get">
+      <input type="SUBMIT" class="btn" value="PLAY AGAIN"/>
+    </form>
+
+    <form action="/end" method="post">
+      <input type="SUBMIT" class="btn" value="END GAME"/>
+    </form>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
